@@ -107,4 +107,51 @@ public class FranquiciaService {
         }
         return null;
     }
+
+    public Franquicia updateFranquiciaNombre(Long id, String nombre) {
+        Franquicia franquicia = findById(id);
+        if (franquicia != null) {
+            franquicia.setNombre(nombre);
+            return franquiciaRepository.save(franquicia);
+        }
+        return null;
+    }
+
+    public Sucursal updateSucursalNombre(Long franquiciaId, Long sucursalId, String nombre) {
+        Franquicia franquicia = findById(franquiciaId);
+        if (franquicia != null) {
+            Optional<Sucursal> sucursalOpt = franquicia.getSucursales().stream()
+                    .filter(s -> s.getId().equals(sucursalId))
+                    .findFirst();
+            if (sucursalOpt.isPresent()) {
+                Sucursal sucursal = sucursalOpt.get();
+                sucursal.setNombre(nombre);
+                franquiciaRepository.save(franquicia);
+                return sucursal;
+            }
+        }
+        return null;
+    }
+
+    public Producto updateProductoNombre(Long franquiciaId, Long sucursalId, Long productoId, String nombre) {
+        Franquicia franquicia = findById(franquiciaId);
+        if (franquicia != null) {
+            Optional<Sucursal> sucursalOpt = franquicia.getSucursales().stream()
+                    .filter(s -> s.getId().equals(sucursalId))
+                    .findFirst();
+            if (sucursalOpt.isPresent()) {
+                Sucursal sucursal = sucursalOpt.get();
+                Optional<Producto> productoOpt = sucursal.getProductos().stream()
+                        .filter(p -> p.getId().equals(productoId))
+                        .findFirst();
+                if (productoOpt.isPresent()) {
+                    Producto producto = productoOpt.get();
+                    producto.setNombre(nombre);
+                    franquiciaRepository.save(franquicia);
+                    return producto;
+                }
+            }
+        }
+        return null;
+    }
 }
