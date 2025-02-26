@@ -1,6 +1,7 @@
 package com.nequi.franquicias.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +24,23 @@ public class Franquicia {
     @JoinColumn(name = "franquicia_id")
     private List<Sucursal> sucursales;
 
-    // Getters and Setters
+    @NotBlank(message = "El nombre no puede estar vacío")
+    private String nombre;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<Sucursal> getSucursales() {
