@@ -16,12 +16,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
 ),
 servers = {
         @Server(
-                description = "DEV SERVER",
-                url = "http://localhost:8080"
-        ),
-        @Server(
                 description = "PROD SERVER",
                 url = "https://franquicias-api-latest.onrender.com"
+        ),
+        @Server(
+                description = "DEV SERVER",
+                url = "http://localhost:8080"
         )
 })
 public class SwaggerConfig { }
