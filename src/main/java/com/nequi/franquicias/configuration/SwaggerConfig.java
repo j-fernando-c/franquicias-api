@@ -21,7 +21,7 @@ servers = {
         ),
         @Server(
                 description = "PROD SERVER",
-                url = "http://domain:8080"
+                url = "https://franquicias-api-latest.onrender.com"
         )
 })
 public class SwaggerConfig { }
